@@ -1,7 +1,5 @@
-using Clientes;
-using Categorias;
-using Produtos;
-namespace Vendas{
+
+namespace Game1{
     internal class VendaUI
     {
         public static void AdicionarProdutoPorId(int idProduto, List<Produto> produtosDisponiveis, Venda venda)

@@ -1,6 +1,5 @@
-using Produtos;
-using Categorias;
-namespace Produtos
+
+namespace Game1
 {
     public class ProdutoUI
     {

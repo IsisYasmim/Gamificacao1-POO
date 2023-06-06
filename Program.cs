@@ -4,11 +4,9 @@
 */
 
 using System;
-using Produtos;
-using Clientes;
-using Categorias;
-using Vendas;
 
+
+namespace Game1{
 class Program
 {
     public static void Main(string[] args)
@@ -68,4 +66,5 @@ class Program
             } while (opcao != 0);
     
     }
+}
 }

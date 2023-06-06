@@ -1,6 +1,5 @@
-using Clientes;
-using Produtos;
-namespace Vendas{
+
+namespace Game1{
 
     public class Venda
     {

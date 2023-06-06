@@ -1,5 +1,5 @@
 
-namespace Categorias
+namespace Game1
 {
     public class CategoriaUI
     {// Adicionar uma categoria

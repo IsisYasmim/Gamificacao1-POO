@@ -1,5 +1,5 @@
-using Vendas;
-namespace Clientes
+
+namespace Game1
 
 {// Arquivo Cliente.cs
 

@@ -1,4 +1,4 @@
-namespace Categorias{
+namespace Game1{
   public class Categoria{
     public int id { get; set; }
     public String nome { get; set; }
