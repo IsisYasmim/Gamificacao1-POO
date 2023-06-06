@@ -2,12 +2,13 @@
 namespace Game1{
     internal class VendaUI
     {
-        public static void AdicionarProdutoPorId(int idProduto, List<Produto> produtosDisponiveis, Venda venda)
+        public static void AdicionarProdutoPorId(int idProduto, List<Produto> produtosDisponiveis, Venda venda, int quantidade)
         {
             Produto produto = produtosDisponiveis.Find(p => p.Id == idProduto);
             if (produto != null)
-            {
-                venda.Produtos.Add(produto);
+            {   
+                var vendaProduto = new VendaProduto(0, produto, quantidade, produto.Preco);
+                venda.Produtos.Add(vendaProduto);
             }
         }
 
@@ -16,6 +17,7 @@ namespace Game1{
             Produto produto = venda.Produtos.Find(p => p.Id == idProduto);
             if (produto != null)
             {
+                var vendaProduto = new VendaProduto(0, produto, quantidade, produto.Preco);
                 venda.Produtos.Remove(produto);
             }
         }
@@ -66,10 +68,12 @@ namespace Game1{
                 switch (opcao)
                 {
                     case 1:
-                        int id;
+                        int id, quantidade;
                         Console.WriteLine("Escreva o ID do produto para adicionar:");
                         id = int.Parse(Console.ReadLine());
-                        AdicionarProdutoPorId(id, produtos, venda);
+                        Console.WriteLine("Escreva a quantidade: ");
+                        quantidade = int.Parse(Console.ReadLine());
+                        AdicionarProdutoPorId(id, produtos, venda, quantidade);
 
                         break;
 
