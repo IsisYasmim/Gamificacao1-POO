@@ -12,18 +12,18 @@ namespace Game1
         // Alterar uma categoria com base no ID
         public static void AlterarCategoria(int? id, Categoria categoriaNova, List<Categoria> categorias)
         {
-            Categoria categoriaAntiga = categorias.Find(c => c.id == id);
+            Categoria categoriaAntiga = categorias.Find(c => c.Id == id);
             if (categoriaAntiga != null)
             {
-                categoriaAntiga.nome = categoriaNova.nome;
-                categoriaAntiga.descricao = categoriaNova.descricao;
+                categoriaAntiga.Nome = categoriaNova.Nome;
+                categoriaAntiga.Descricao = categoriaNova.Descricao;
             }
         }
 
         // Remover uma categoria com base no ID
         public static void RemoverCategoria(int id, List<Categoria> categorias)
         {
-            Categoria categoria = categorias.Find(c => c.id == id);
+            Categoria categoria = categorias.Find(c => c.Id == id);
             if (categoria != null)
             {
                 categorias.Remove(categoria);
@@ -40,13 +40,13 @@ namespace Game1
         {
             foreach (Categoria categoria in categorias)
             {
-                Console.WriteLine($"ID: {categoria.id} | Nome: {categoria.nome} | Descrição: {categoria.descricao}");
+                Console.WriteLine($"ID: {categoria.Id} | Nome: {categoria.Nome} | Descrição: {categoria.Descricao}");
             }
         }
 
         public static Categoria BuscarCategoriaPorId(int id, List<Categoria> categorias)
         {
-            Categoria categoria = categorias.Find(c => c.id == id);
+            Categoria categoria = categorias.Find(c => c.Id == id);
             return categoria;
         }
 

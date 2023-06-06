@@ -13,3 +13,18 @@ C:\Users\Isis\Documents\Faculdade\POO\Gamificacao1\obj\Debug\net7.0\refint\Gamif
 C:\Users\Isis\Documents\Faculdade\POO\Gamificacao1\obj\Debug\net7.0\Gamificacao1.pdb
 C:\Users\Isis\Documents\Faculdade\POO\Gamificacao1\obj\Debug\net7.0\Gamificacao1.genruntimeconfig.cache
 C:\Users\Isis\Documents\Faculdade\POO\Gamificacao1\obj\Debug\net7.0\ref\Gamificacao1.dll
+C:\Users\Felipe\Documents\UTFPR\Programação Orientada a Objetos\Game_POO\Gamificacao1-POO\bin\Debug\net7.0\Gamificacao1.exe
+C:\Users\Felipe\Documents\UTFPR\Programação Orientada a Objetos\Game_POO\Gamificacao1-POO\bin\Debug\net7.0\Gamificacao1.deps.json
+C:\Users\Felipe\Documents\UTFPR\Programação Orientada a Objetos\Game_POO\Gamificacao1-POO\bin\Debug\net7.0\Gamificacao1.runtimeconfig.json
+C:\Users\Felipe\Documents\UTFPR\Programação Orientada a Objetos\Game_POO\Gamificacao1-POO\bin\Debug\net7.0\Gamificacao1.dll
+C:\Users\Felipe\Documents\UTFPR\Programação Orientada a Objetos\Game_POO\Gamificacao1-POO\bin\Debug\net7.0\Gamificacao1.pdb
+C:\Users\Felipe\Documents\UTFPR\Programação Orientada a Objetos\Game_POO\Gamificacao1-POO\obj\Debug\net7.0\Gamificacao1.csproj.AssemblyReference.cache
+C:\Users\Felipe\Documents\UTFPR\Programação Orientada a Objetos\Game_POO\Gamificacao1-POO\obj\Debug\net7.0\Gamificacao1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Felipe\Documents\UTFPR\Programação Orientada a Objetos\Game_POO\Gamificacao1-POO\obj\Debug\net7.0\Gamificacao1.AssemblyInfoInputs.cache
+C:\Users\Felipe\Documents\UTFPR\Programação Orientada a Objetos\Game_POO\Gamificacao1-POO\obj\Debug\net7.0\Gamificacao1.AssemblyInfo.cs
+C:\Users\Felipe\Documents\UTFPR\Programação Orientada a Objetos\Game_POO\Gamificacao1-POO\obj\Debug\net7.0\Gamificacao1.csproj.CoreCompileInputs.cache
+C:\Users\Felipe\Documents\UTFPR\Programação Orientada a Objetos\Game_POO\Gamificacao1-POO\obj\Debug\net7.0\Gamificacao1.dll
+C:\Users\Felipe\Documents\UTFPR\Programação Orientada a Objetos\Game_POO\Gamificacao1-POO\obj\Debug\net7.0\refint\Gamificacao1.dll
+C:\Users\Felipe\Documents\UTFPR\Programação Orientada a Objetos\Game_POO\Gamificacao1-POO\obj\Debug\net7.0\Gamificacao1.pdb
+C:\Users\Felipe\Documents\UTFPR\Programação Orientada a Objetos\Game_POO\Gamificacao1-POO\obj\Debug\net7.0\Gamificacao1.genruntimeconfig.cache
+C:\Users\Felipe\Documents\UTFPR\Programação Orientada a Objetos\Game_POO\Gamificacao1-POO\obj\Debug\net7.0\ref\Gamificacao1.dll

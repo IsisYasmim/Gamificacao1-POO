@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Isis\\.nuget\\packages\\": {}
+    "C:\\Users\\Felipe\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Isis\\Documents\\Faculdade\\POO\\Gamificacao1\\Gamificacao1.csproj",
+      "projectUniqueName": "C:\\Users\\Felipe\\Documents\\UTFPR\\Programação Orientada a Objetos\\Game_POO\\Gamificacao1-POO\\Gamificacao1.csproj",
       "projectName": "Gamificacao1",
-      "projectPath": "C:\\Users\\Isis\\Documents\\Faculdade\\POO\\Gamificacao1\\Gamificacao1.csproj",
-      "packagesPath": "C:\\Users\\Isis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Isis\\Documents\\Faculdade\\POO\\Gamificacao1\\obj\\",
+      "projectPath": "C:\\Users\\Felipe\\Documents\\UTFPR\\Programação Orientada a Objetos\\Game_POO\\Gamificacao1-POO\\Gamificacao1.csproj",
+      "packagesPath": "C:\\Users\\Felipe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Felipe\\Documents\\UTFPR\\Programação Orientada a Objetos\\Game_POO\\Gamificacao1-POO\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Isis\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Felipe\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -59,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
