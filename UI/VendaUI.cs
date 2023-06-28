@@ -1,5 +1,5 @@
 
-namespace Game1{
+namespace Gamef1{
     internal class VendaUI
     {
         public static void AdicionarProdutoPorId(int idProduto, List<Produto> produtosDisponiveis, Venda venda, int quantidade)
