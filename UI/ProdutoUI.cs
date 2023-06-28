@@ -1,123 +1,245 @@
-
 namespace Game1
 {
     public class ProdutoUI
     {
-
-        public static void RegistrarProduto(Produto produto, List<Produto> produtos)
+        public void MenuProduto()
         {
-            produtos.Add(produto);
+            string opcaoPro;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("1 - Cadastrar produto");
+                Console.WriteLine("2 - Alterar produto");
+                Console.WriteLine("3 - Listar produtos");
+                Console.WriteLine("4 - Ver produto pelo Id");
+                Console.WriteLine("5 - Excluir produto");
+                Console.WriteLine("0 - Voltar");
+                Console.Write("Escolha uma opção: ");
+                opcaoPro = Console.ReadLine();
+
+                switch (opcaoPro)
+                {
+                    case "1":
+                        CadastrarProduto();
+                        break;
+                    case "2":
+                        AlterarProduto();
+                        break;
+                    case "3":
+                        ListarProdutos();
+                        break;
+                    case "4":
+                        Produto produto = BuscarProdutoPorId();
+                        if(produto != null)
+                        {
+                            Console.WriteLine($"ID: {produto.Id} | Nome: {produto.Nome} | Preço: {produto.Preco} | Categoria: {produto.Categoria.Nome}");
+                        }
+                        break;
+                    case "5":
+                        ExcluirProduto();
+                        break;
+                    case "0":
+                        Console.WriteLine("Saindo...");
+                        break;
+                    default:
+                        Console.WriteLine("Opção inválida!");
+                        break;
+                }
+                Console.WriteLine("Pressione qualquer tecla para continuar...");
+                Console.ReadKey();
+            } while (opcaoPro != "0");
         }
 
-        public static void ListarProdutos(List<Produto> produtos)
+        private void CadastrarProduto()
         {
-            foreach (Produto produto in produtos)
+            Console.Clear();
+            Console.WriteLine("Cadastro de produto:");
+
+            Console.Write("Nome: ");
+            string nome = Console.ReadLine();
+            nome = Verificacao.VerificarNulidade(nome);
+
+            Console.Write("Preço: ");
+            double preco = Verificacao.VerificarDouble(Console.ReadLine());
+            
+            Console.Write("Id da categoria: ");
+            int categoriaId = Verificacao.VerificarNumero(Console.ReadLine());
+
+            Categoria categoria = Categoria.Categorias.Find(c => c.Id == categoriaId);
+
+            while(categoria == null)
             {
-                Console.WriteLine(produto);
+                Console.Write("\nCategoria não encontrada!\nDigite o ID novamente (0 voltar):");
+                categoriaId = Verificacao.VerificarNumero(Console.ReadLine());
+
+                if(categoriaId == 0)
+                {
+                    return;
+                }
+
+                categoria = Categoria.Categorias.Find(c => c.Id == categoriaId);
+            }
+
+            var proximoID = Produto.Produtos.Max((e) => e.Id) + 1;
+
+            Produto produto = new Produto
+            {
+                Id = proximoID ?? 1,
+                ProdutoGuid = Guid.NewGuid(),
+                Nome = nome,
+                Preco = preco,
+                Categoria = categoria
+            };
+            Produto.Produtos.Add(produto);
+            Console.WriteLine("Produto cadastrado com sucesso!");
+        }
+
+        private void AlterarProduto()
+        {
+            Console.Clear();
+
+            try
+            {
+                if (Produto.Produtos.Count == 0)
+                {
+                    throw new Exception("Não há nenhum produto cadastrado!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
+
+            Console.WriteLine("Alteração de produto:");
+
+            Console.Write("ID do produto: ");
+            long idProduto = long.Parse(Console.ReadLine());
+
+            Produto produto = Produto.Produtos.Find(p => p.Id == idProduto);
+
+            while(produto == null)
+            {
+                Console.Write("\nProduto não encontrado!\nInforme o ID novamente:");
+                idProduto = int.Parse(Console.ReadLine());
+                produto = Produto.Produtos.Find(p => p.Id == idProduto);
+            }
+            
+            Console.Write($"Digite o novo nome ({produto.Nome}): ");
+            string nome = Console.ReadLine();
+            nome = Verificacao.VerificarNulidade(nome);
+            produto.Nome = nome;
+
+            Console.Write($"Digite o novo preço ({produto.Preco}): ");
+            double preco = Verificacao.VerificarDouble(Console.ReadLine());
+            produto.Preco = preco;
+
+            Console.Write($"Digite o novo id da categoria ({produto.Categoria.Id}): ");
+            int categoriaId = Verificacao.VerificarNumero(Console.ReadLine());
+            produto.Categoria = Categoria.Categorias.Find(c => c.Id == categoriaId);
+
+            while(produto.Categoria == null)
+            {
+                Console.Write("\nCategoria não encontrada!\nInforme o ID novamente:");
+                categoriaId = Verificacao.VerificarNumero(Console.ReadLine());
+                produto.Categoria = Categoria.Categorias.Find(c => c.Id == categoriaId);
+            }
+
+            Console.WriteLine("Produto alterado com sucesso!");
+        }
+        
+        public static void ListarProdutos()
+        {
+            Console.Clear();
+
+            try
+            {
+                if (Produto.Produtos.Count == 0)
+                {
+                    throw new Exception("Não há nenhum produto cadastrado!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
+
+            Console.WriteLine("Lista de produtos:");
+            foreach (var produto in Produto.Produtos)
+            {
+                Console.WriteLine($"ID: {produto.Id} | Nome: {produto.Nome} | Preço: {produto.Preco} | Categoria: {produto.Categoria.Nome}");
             }
         }
 
-        public static void RemoverProduto(int id, List<Produto> produtos)
+        public static Produto BuscarProdutoPorId()
         {
-            Produto produto = produtos.Find(p => p.Id == id);
+            Console.Clear();
+
+            try
+            {
+                if (Produto.Produtos.Count == 0)
+                {
+                    throw new ArgumentException("Não há nenhum produto cadastrado!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+
+            Console.WriteLine("Buscar produto por Id:");
+
+            Console.Write("Id do produto: ");
+            int id = Verificacao.VerificarNumero(Console.ReadLine());
+
+            Produto produto = Produto.Produtos.Find(c => c.Id == id);
+
+            while (produto == null)
+            {
+                Console.Write("\nProduto não encontrado!\nDigite novamente o código do produto: ");
+                id = Verificacao.VerificarNumero(Console.ReadLine());
+                produto = Produto.Produtos.Find(c => c.Id == id);
+            }
+
+            return produto;
+
+        }
+     
+        private void ExcluirProduto()
+        {
+            Console.Clear();
+
+            try
+            {
+                if (Produto.Produtos.Count == 0)
+                {
+                    throw new Exception("Não há nenhum produto cadastrado!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
+
+            Console.WriteLine("Exclusão de produto:");
+
+            Console.Write("ID do produto: ");
+            int id = Verificacao.VerificarNumero(Console.ReadLine());
+
+            Produto produto = Produto.Produtos.Find(p => p.Id == id);
+
             if (produto != null)
             {
-                produtos.Remove(produto);
-                Console.WriteLine("Produto removido com sucesso!");
+                Produto.Produtos.Remove(produto);
+                Console.WriteLine("Produto excluído com sucesso!");
             }
             else
             {
-                Console.WriteLine("Produto não encontrado.");
+                Console.WriteLine("Produto não encontrado!");
             }
-        }
-
-        public static void AlterarProduto(int id, Produto produtoNovo, List<Produto> produtos)
-        {
-            Produto produtoAntigo = produtos.Find(c => c.Id == id);
-            if (produtoAntigo != null)
-            {
-                produtoAntigo.Nome = produtoNovo.Nome;
-                produtoAntigo.Preco = produtoNovo.Preco;
-            }
-        }
-
-        public static Produto BuscarProdutoPorId(int id, List<Produto> produtos)
-        {
-            Produto produto = produtos.Find(c => c.Id == id);
-            return produto;
-        }
-
-        public static void MenuProduto(List<Produto> produtos, List<Categoria> categorias)
-        {
-            int opcao;
-            do
-            {
-
-                Console.WriteLine("Escolha uma opção:");
-                Console.WriteLine("1 - Adicionar produto");
-                Console.WriteLine("2 - Remover produto");
-                Console.WriteLine("3 - Alterar produto");
-                Console.WriteLine("4 - Ver produtos adicionados");
-                Console.WriteLine("0 - Sair");
-                opcao = int.Parse(Console.ReadLine());
-
-
-                switch (opcao)
-                {
-                    case 1:
-                        int id, idcat;
-                        string nome;
-                        double preco;
-                        Console.WriteLine("Escreva o ID do produto:");
-                        id = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Escreva o nome do produto:");
-                        nome = Console.ReadLine();
-                        Console.WriteLine("Escreva o preço do produto:");
-                        preco = double.Parse(Console.ReadLine());
-                        Console.WriteLine("Escreva o ID da categoria do produto:");
-                        idcat = int.Parse(Console.ReadLine());
-                        Produto novoproduto = new Produto(id, nome, preco, CategoriaUI.BuscarCategoriaPorId(idcat, categorias));
-                        ProdutoUI.RegistrarProduto(novoproduto, produtos);
-
-                        break;
-
-                    case 2:
-
-                        Console.WriteLine("Escreva o id do produto para remover:");
-                        id = int.Parse(Console.ReadLine());
-                        RemoverProduto(id, produtos);
-
-                        break;
-
-                    case 3:
-                        Console.WriteLine("Escreva o ID do produto a ser alterado:");
-                        id = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Escreva o nome do produto novo:");
-                        nome = Console.ReadLine();
-                        Console.WriteLine("Escreva o preço do produto novo:");
-                        preco = double.Parse(Console.ReadLine());
-                        Console.WriteLine("Escreva o ID da categoria do produto novo:");
-                        idcat = int.Parse(Console.ReadLine());
-                        Produto produtoAlterado = new Produto(id, nome, preco, CategoriaUI.BuscarCategoriaPorId(idcat, categorias));
-                        AlterarProduto(id, produtoAlterado, produtos);
-
-                        break;
-
-                    case 4:
-                        ListarProdutos(produtos);
-                        break;
-
-                    case 0:
-                        Console.WriteLine("Saindo...");
-                        break;
-
-                    default:
-
-                        break;
-                }
-            } while (opcao != 0);
-
-
         }
     }
 }

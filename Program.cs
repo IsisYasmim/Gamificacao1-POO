@@ -3,68 +3,62 @@
     Felipe Bueno
 */
 
-using System;
-
-
-namespace Game1{
-class Program
+namespace Game1
 {
-    public static void Main(string[] args)
+    public class Program
     {
-        List<Produto> produtos = new List<Produto>();
-        List<Categoria> categorias = new List<Categoria>();
-        List<Cliente> clientes = new List<Cliente>();
-        List<Venda> vendas = new List<Venda>();
-        int opcao;
-        do
-            {
-                Console.WriteLine("Escolha uma opção:");
-                Console.WriteLine("1 - Adicionar, remover, ver ou alterar categorias");
-                Console.WriteLine("2 - Adicionar, remover, ver ou alterar produtos");
-                Console.WriteLine("3 - Adicionar, remover, ver ou alterar clientes");
-                Console.WriteLine("4 - Realizar venda");
-                Console.WriteLine("0 - Sair");
 
-                opcao = int.Parse(Console.ReadLine());
+        static void Main(string[] args)
+        {
+            string opcao;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("1 - Gerenciar produtos");
+                Console.WriteLine("2 - Gerenciar categorias");
+                Console.WriteLine("3 - Gerenciar clientes");
+                Console.WriteLine("4 - Realizar venda");
+                Console.WriteLine("5 - Mostrar relatório de vendas");
+                Console.WriteLine("0 - Sair");
+                Console.Write("Escolha uma opção: ");
+                opcao = Console.ReadLine();
 
                 switch (opcao)
                 {
-                    case 1:
-                        CategoriaUI.MenuCategoria(categorias);
+                    case "1":
+                        ProdutoUI produtoUI = new();
+                        produtoUI.MenuProduto();
                         break;
-
-
-                    case 2:
-                        ProdutoUI.MenuProduto(produtos,categorias);// Código para a opção 2
+                    case "2":
+                        CategoriaUI categoriaUI = new();
+                        categoriaUI.MenuCategoria();
                         break;
-
-
-                    case 3:
-                        ClienteUI.MenuCliente(clientes, vendas);
+                    case "3":
+                        ClienteUI clienteUI = new();
+                        clienteUI.MenuCliente();
                         break;
-
-
-                    case 4:
-                        VendaUI.MenuVenda(produtos, clientes, vendas);
+                    case "4":
+                        VendaUI vendaUI = new();
+                        vendaUI.RealizarVenda();
+                        Console.WriteLine("Pressione qualquer tecla para continuar...");
+                        Console.ReadKey();
                         break;
-
-
-                    case 0:
+                    case "5":
+                        RelatorioUI relatorioUI = new();
+                        relatorioUI.MostrarRelatorioVendas();
+                        Console.WriteLine("Pressione qualquer tecla para continuar...");
+                        Console.ReadKey();
+                        break;
+                    case "0":
                         Console.WriteLine("Saindo...");
                         break;
-
-
                     default:
                         Console.WriteLine("Opção inválida!");
+                        Console.WriteLine("Pressione qualquer tecla para continuar...");
+                        Console.ReadKey();
                         break;
-                }
-
-                Console.WriteLine("\nPressione qualquer tecla para continuar...");
-                Console.ReadKey();
-                Console.Clear();
-
-            } while (opcao != 0);
-    
+                } 
+            } while (opcao != "0");
+        }
     }
-}
 }

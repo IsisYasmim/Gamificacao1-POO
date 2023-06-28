@@ -1,160 +1,243 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Game1
 {
     public class ClienteUI
-    {
-        // Adicionar um novo cliente
-        public static void AdicionarCliente(int id, string nome, string sobrenome, string endereco, string telefone, List<Cliente> clientes)
+    {   
+        public void MenuCliente()
         {
-            Cliente cliente = new Cliente(id, nome, sobrenome, endereco, telefone);
-            clientes.Add(cliente);
-        }
-
-        // Alterar dados de um cliente com base no ID
-        public static void AlterarCliente(int id, string nome, string sobrenome, string endereco, string telefone, List<Cliente> clientes)
-        {
-            Cliente cliente = clientes.Find(c => c.Id == id);
-            if (cliente != null)
-            {
-                cliente.Nome = nome;
-                cliente.Sobrenome = sobrenome;
-                cliente.Endereco = endereco;
-                cliente.Telefone = telefone;
-            }
-        }
-
-        // Remover um cliente com base no ID
-        public static void RemoverCliente(int id, List<Cliente> clientes)
-        {
-            Cliente cliente = clientes.Find(c => c.Id == id);
-            if (cliente != null)
-            {
-                clientes.Remove(cliente);
-            }
-        }
-
-        // Listar todas as vendas de um cliente
-        public static void ListarVendas(int id, List<Cliente> clientes)
-        {
-            Cliente cliente = clientes.Find(c => c.Id == id);
-            if (cliente != null)
-            {
-                Console.WriteLine($"Vendas do cliente {cliente.Nome} {cliente.Sobrenome}:");
-                foreach (Venda venda in cliente.Vendas)
-                {
-                    Console.WriteLine($"ID da venda: {venda.Id}");
-                }
-            }
-        }
-
-        public static void ListarClientes(List<Cliente> clientes)
-        {
-            Console.WriteLine("Clientes cadastrados:");
-            foreach (Cliente cliente in clientes)
-            {
-                Console.WriteLine($"ID : {cliente.Id} | Nome: {cliente.Nome} {cliente.Sobrenome} | Endereço: {cliente.Endereco} | Telefone: {cliente.Telefone}");
-            }
-        }
-
-        public static Cliente BuscarClientePorId(int id, List<Cliente> clientes)
-        {
-            Cliente cliente = clientes.Find(c => c.Id == id);
-            return cliente;
-        }
-
-        public static void AdicionarVendas(int idCliente, List<Venda> vendas, List<Cliente> clientes)
-        {
-            Cliente cliente = clientes.Find(c => c.Id == idCliente);
-            if (cliente != null)
-            {
-                cliente.Vendas.AddRange(vendas);
-            }
-        }
-
-        public static void MenuCliente(List<Cliente> clientes, List<Venda> vendas)
-        {
-            int opcao;
+            string opcaoCli;
             do
             {
-
+                Console.Clear();
                 Console.WriteLine("Escolha uma opção:");
-                Console.WriteLine("1 - Adicionar cliente");
-                Console.WriteLine("2 - Remover cliente");
-                Console.WriteLine("3 - Alterar cliente");
-                Console.WriteLine("4 - Ver clientes adicionados");
-                Console.WriteLine("5 - Ver vendas realizadas para cada cliente");
+                Console.WriteLine("1 - Cadastrar cliente");
+                Console.WriteLine("2 - Alterar cliente");
+                Console.WriteLine("3 - Listar clientes");
+                Console.WriteLine("4 - Ver cliente pelo Id");
+                Console.WriteLine("5 - Excluir cliente");
                 Console.WriteLine("0 - Sair");
-                opcao = int.Parse(Console.ReadLine());
+                opcaoCli = Console.ReadLine();
 
 
-                switch (opcao)
+                switch (opcaoCli)
                 {
-                    case 1:
-                        int id;
-                        string nome, sobrenome, endereco, telefone;
-                        Console.WriteLine("Escreva o ID do cliente:");
-                        id = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Escreva o nome do cliente:");
-                        nome = Console.ReadLine();
-                        Console.WriteLine("Escreva o sobrenome do cliente:");
-                        sobrenome = Console.ReadLine();
-                        Console.WriteLine("Escreva o endereço do cliente:");
-                        endereco = Console.ReadLine();
-                        Console.WriteLine("Escreva o telefone do cliente:");
-                        telefone = Console.ReadLine();
-                        AdicionarCliente(id, nome, sobrenome, endereco, telefone, clientes);
-
+                    case "1":
+                        CadastrarCliente();
                         break;
 
-                    case 2:
-
-                        Console.WriteLine("Escreva o id do cliente para remover:");
-                        id = int.Parse(Console.ReadLine());
-                        RemoverCliente(id, clientes);
-
+                    case "2":
+                        AlterarCliente();
                         break;
 
-                    case 3:
-                        Console.WriteLine("Escreva o ID do cliente a ser alterado:");
-                        id = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Escreva o nome do cliente novo:");
-                        nome = Console.ReadLine();
-                        Console.WriteLine("Escreva o sobrenome do cliente novo:");
-                        sobrenome = Console.ReadLine();
-                        Console.WriteLine("Escreva o endereço do cliente novo:");
-                        endereco = Console.ReadLine();
-                        Console.WriteLine("Escreva o telefone do cliente novo:");
-                        telefone = Console.ReadLine();
-                        AlterarCliente(id, nome, sobrenome, endereco, telefone, clientes);
-
+                    case "3":
+                        ListarClientes();
                         break;
 
-                    case 4:
-                        ListarClientes(clientes);
+                    case "4":
+                        Cliente cliente = BuscarClientePorId();
+                        if(cliente != null)
+                        {
+                            Console.WriteLine($"Id: {cliente.Id} | Guid: {cliente.ClienteGuid} | Nome completo: {cliente.Nome} {cliente.Sobrenome} | Endereço: {cliente.Endereco} | Telefone: {cliente.Telefone}");
+                        }
                         break;
 
-                    case 5:
-                        Console.WriteLine("Escreva o ID do cliente:");
-                        id = int.Parse(Console.ReadLine());
-                        ListarVendas(id, clientes);
+                    case "5":
+                        ExcluirCliente();
                         break;
 
-                    case 0:
+                    case "0":
                         Console.WriteLine("Saindo...");
                         break;
 
                     default:
-
+                        Console.WriteLine("Opção inválida!");
                         break;
                 }
-            } while (opcao != 0);
+                Console.WriteLine("Pressione qualquer tecla para continuar...");
+                Console.ReadKey();
+            } while (opcaoCli != "0");
 
+        }
+    
+        private void CadastrarCliente()
+        {
+            Console.Clear();
+            Console.WriteLine("Cadastro de cliente:");
 
+            Console.Write("Nome: ");
+            string nome = Console.ReadLine();
+            nome = Verificacao.VerificarNulidade(nome);
+
+            Console.Write("Sobrenome: ");
+            string sobrenome = Console.ReadLine();
+            sobrenome = Verificacao.VerificarNulidade(sobrenome);
+
+            Console.Write("Endereço: ");
+            string endereco = Console.ReadLine();
+            endereco = Verificacao.VerificarNulidade(endereco);
+
+            Console.Write("Telefone: ");
+            string telefone = Console.ReadLine();
+            telefone = Verificacao.VerificarNulidade(telefone);
+
+            var proximoID = Cliente.Clientes.Max((e) => e.Id) + 1;
+
+            Cliente cliente = new Cliente
+            {
+                Id = proximoID ?? 1,
+                ClienteGuid = Guid.NewGuid(),
+                Nome = nome,
+                Sobrenome = sobrenome,
+                Endereco = endereco,
+                Telefone = telefone
+            };
+            Cliente.Clientes.Add(cliente);
+            Console.WriteLine("\r\nCliente cadastrado com sucesso!");
+        }
+
+        private void AlterarCliente()
+        {
+            Console.Clear();
+
+            try
+            {
+                if (Cliente.Clientes.Count == 0)
+                {
+                    throw new Exception("Não há nenhum cliente cadastrado!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
+
+            Console.WriteLine("Alterar cliente");
+
+            Console.Write("ID do cliente: ");
+            int id = Verificacao.VerificarNumero(Console.ReadLine());
+
+            Cliente cliente = Cliente.Clientes.Find(c => c.Id == id);
+
+            while (cliente == null)
+            {
+                Console.Write("\nCliente não encontrada!\nDigite novamente o código do cliente: ");
+                id = Verificacao.VerificarNumero(Console.ReadLine());
+                cliente = Cliente.Clientes.Find(c => c.Id == id);
+            }
+
+            Console.Write($"Digite o novo nome ({cliente.Nome}): ");
+            string nome = Console.ReadLine();
+            nome = Verificacao.VerificarNulidade(nome);
+
+            Console.Write($"Digite o novo sobrenome ({cliente.Sobrenome}): ");
+            string sobrenome = Console.ReadLine();
+            sobrenome = Verificacao.VerificarNulidade(sobrenome);
+
+            Console.Write($"Digite o novo endereço ({cliente.Endereco}): ");
+            string endereco = Console.ReadLine();
+            endereco = Verificacao.VerificarNulidade(endereco);
+
+            Console.Write($"Digite o novo telefone ({cliente.Telefone}): ");
+            string telefone = Console.ReadLine();
+            telefone = Verificacao.VerificarNulidade(telefone);
+
+            cliente.Nome = nome;
+            cliente.Sobrenome = sobrenome;
+            cliente.Endereco = endereco;
+            cliente.Telefone = telefone;
+            Console.WriteLine("Cliente alterado com sucesso!");
+        }
+
+        private void ListarClientes()
+        {
+            Console.Clear();
+
+            try
+            {
+                if(Cliente.Clientes.Count == 0)
+                {
+                    throw new Exception("Não há nenhum cliente cadastrado!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
+
+            Console.WriteLine("Lista de clientes:");
+            foreach (var cliente in Cliente.Clientes)
+            {
+                Console.WriteLine($"ID: {cliente.Id} | Nome Completo: {cliente.Nome} {cliente.Sobrenome} | Endereço: {cliente.Endereco} | Telefone: {cliente.Telefone}");
+            }
+        }
+
+        public static Cliente BuscarClientePorId()
+        {
+            Console.Clear();
+
+            try
+            {
+                if (Cliente.Clientes.Count == 0)
+                {
+                    throw new ArgumentException("Não há nenhum cliente cadastrado!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+
+            Console.WriteLine("Buscar cliente por Id:");
+
+            int id = Verificacao.VerificarNumero(Console.ReadLine());
+
+            Cliente cliente = Cliente.Clientes.Find(c => c.Id == id);
+
+            while (cliente == null)
+            {
+                Console.Write("\nCliente não encontrado!\nDigite novamente o código do cliente: ");
+                id = Verificacao.VerificarNumero(Console.ReadLine());
+                cliente = Cliente.Clientes.Find(c => c.Id == id);
+            }
+
+            return cliente;
+
+        }
+    
+        private void ExcluirCliente()
+        {
+            Console.Clear();
+
+            try
+            {
+                if (Cliente.Clientes.Count == 0)
+                {
+                    throw new Exception("Não há nenhum cliente cadastrado!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
+
+            Console.WriteLine("Excluir cliente");
+
+            Console.Write("ID do cliente: ");
+            int id = Verificacao.VerificarNumero(Console.ReadLine());
+
+            Cliente cliente = Cliente.Clientes.Find(c => c.Id == id);
+
+            while (cliente == null)
+            {
+                Console.Write("\nCliente não encontrado!\nDigite novamente o código do cliente: ");
+                id = Verificacao.VerificarNumero(Console.ReadLine());
+                cliente = Cliente.Clientes.Find(c => c.Id == id);
+            }
+
+            Cliente.Clientes.Remove(cliente);
         }
     }
 }
